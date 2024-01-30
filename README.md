@@ -1,4 +1,4 @@
-"W" - carrinho rossa;
+"W" - carrinho rossa;                                                                                                  
 "Seta para cima" - carrinho vermelho.
 
 CLIQUE FRENETICAMENTE!
