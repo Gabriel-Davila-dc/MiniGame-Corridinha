@@ -4,19 +4,33 @@
  */
 package packcorridinha;
 
+import java.awt.Color;
+import static java.lang.Thread.sleep;
+import javax.naming.ldap.Rdn;
+
 /**
  *
  * @author gabri
  */
 public class Agrvai extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Agrvai
-     */
+    int miliseg = 0;
+    int seg = 0;
+    boolean estado = true;
+    int numeroSupremo =0;
+    
+    int redn;
+    int pinkn;
+    
+   
+    
     public Agrvai() {
         initComponents();
+        painelConometro.setVisible(false);
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,12 +42,19 @@ public class Agrvai extends javax.swing.JFrame {
 
         lblPink = new javax.swing.JLabel();
         lblRed = new javax.swing.JLabel();
+        lblSetaCima = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        painelConometro = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        lblVencedor = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         lblPista = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -44,8 +65,47 @@ public class Agrvai extends javax.swing.JFrame {
 
         lblRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrinho.png"))); // NOI18N
         lblRed.setText("jLabel1");
-        getContentPane().add(lblRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 540, 84, -1));
+        getContentPane().add(lblRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, 84, -1));
 
+        lblSetaCima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tecla-seta-cima.png"))); // NOI18N
+        getContentPane().add(lblSetaCima, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tecla-w.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
+
+        painelConometro.setOpaque(false);
+        painelConometro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setBackground(new java.awt.Color(204, 204, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Restart");
+        jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        painelConometro.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 200, -1));
+
+        lblVencedor.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
+        lblVencedor.setForeground(new java.awt.Color(255, 0, 0));
+        lblVencedor.setText("car");
+        painelConometro.add(lblVencedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, -10, 150, 50));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel1.setText("WIN");
+        painelConometro.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 110, 50));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bandeira-cronometro.png"))); // NOI18N
+        painelConometro.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        getContentPane().add(painelConometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 220, 170));
+
+        lblPista.setBackground(new java.awt.Color(255, 255, 255));
+        lblPista.setForeground(new java.awt.Color(255, 255, 255));
         lblPista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pista.png"))); // NOI18N
         getContentPane().add(lblPista, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, -1));
 
@@ -53,28 +113,39 @@ public class Agrvai extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-       
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+         
         int xR = lblRed.getX();
         int yR = lblRed.getY();
         
         if(evt.getKeyCode() == evt.VK_UP){
             lblRed.setLocation(xR, yR - 5);
+            redn++;
          }
-        if(evt.getKeyCode() == evt.VK_DOWN){
-            lblRed.setLocation(xR, yR - 10);
-         }
+       
+           if(redn == 106){
+           lblVencedor.setText(" Red");
+           lblVencedor.setForeground(Color.red);
+           painelConometro.setVisible(true);
+           }
+         
         
         int xP = lblPink.getX();
         int yP = lblPink.getY();
         
          if(evt.getKeyCode() == evt.VK_W){
             lblPink.setLocation(xP, yP - 5);
+            pinkn++;
          }
-        if(evt.getKeyCode() == evt.VK_S){
-            lblPink.setLocation(xP, yP - 10);
-         }
-    }//GEN-LAST:event_formKeyPressed
+         if(pinkn == 106){
+           lblVencedor.setText("Pink");
+           lblVencedor.setForeground(Color.pink);
+           painelConometro.setVisible(true);         }
+    }//GEN-LAST:event_formKeyReleased
 
     /**
      * @param args the command line arguments
@@ -112,8 +183,15 @@ public class Agrvai extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblPink;
     private javax.swing.JLabel lblPista;
     private javax.swing.JLabel lblRed;
+    private javax.swing.JLabel lblSetaCima;
+    private javax.swing.JLabel lblVencedor;
+    private javax.swing.JPanel painelConometro;
     // End of variables declaration//GEN-END:variables
 }
